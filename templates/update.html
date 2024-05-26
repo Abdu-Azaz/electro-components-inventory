@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="my-4">Update Component</h2>
+<form method="POST" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{ component.name }}" required>
+        <div class="invalid-feedback">
+            Please enter a name.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="category" class="form-label">Category:</label>
+        <input type="text" class="form-control" id="category" name="category" value="{{ component.category }}" required>
+        <div class="invalid-feedback">
+            Please enter a category.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity:</label>
+        <input type="number" class="form-control" id="quantity" name="quantity" value="{{ component.quantity }}" required>
+        <div class="invalid-feedback">
+            Please enter a quantity.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="location" class="form-label">Location:</label>
+        <input type="text" class="form-control" id="location" name="location" value="{{ component.location }}" required>
+        <div class="invalid-feedback">
+            Please enter a location.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="notes" class="form-label">Notes:</label>
+        <textarea class="form-control" id="notes" name="notes">{{ component.notes }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Component</button>
+</form>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+{% endblock %}

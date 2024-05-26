@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="my-4">Borrow Component: {{ component.name }}</h2>
+<form method="POST" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label for="borrower_name" class="form-label">Borrower Name:</label>
+        <input type="text" class="form-control" id="borrower_name" name="borrower_name" required>
+        <div class="invalid-feedback">
+            Please enter the borrower's name.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="borrowed_quantity" class="form-label">Quantity:</label>
+        <input type="number" class="form-control" id="borrowed_quantity" name="borrowed_quantity" required>
+        <div class="invalid-feedback">
+            Please enter the quantity.
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Borrow</button>
+</form>
+
+<script>
+    (function () {
+        'use strict'
+
+        var forms = document.querySelectorAll('.needs-validation')
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+{% endblock %}

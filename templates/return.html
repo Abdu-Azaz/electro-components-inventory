@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="my-4">Return Component</h2>
+<p>Borrower: {{ borrowed_component.borrower_name }}</p>
+<p>Component: {{ borrowed_component.component.name }}</p>
+<p>Quantity: {{ borrowed_component.borrowed_quantity }}</p>
+<form method="POST">
+    <button type="submit" class="btn btn-primary">Return</button>
+</form>
+{% endblock %}
