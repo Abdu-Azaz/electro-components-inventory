@@ -3,10 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import pandas as pd
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///inventory.db'
 app.config['SECRET_KEY'] = 'secret'
 db = SQLAlchemy(app)
+# csrf = CSRFProtect(app)
+
 
 class Component(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -39,6 +42,20 @@ def index():
     components = Component.query.all()
     borrowed_components = BorrowedComponent.query.all()
     return render_template('index.html', components=components, borrowed_components=borrowed_components)
+
+@app.route('/clear', methods=['POST'])
+def clear():
+    # Find all borrowed components that have been returned
+    returned_borrowed_components = BorrowedComponent.query.filter(BorrowedComponent.returned_date.isnot(None)).all()
+
+    for borrowed in returned_borrowed_components:
+        db.session.delete(borrowed)
+
+    db.session.commit()
+
+    flash('Cleared history of returned borrowed components.')
+    return redirect(url_for('index'))
+
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
