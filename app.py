@@ -60,10 +60,12 @@ def clear():
 @app.route('/add', methods=['GET', 'POST'])
 def add():
     if request.method == 'POST':
+        print("Hello")
+        print(request.form)
         name = request.form['name']
-        category = request.form['category']
         quantity = request.form['quantity']
         location = request.form['location']
+        category = request.form['category']
         notes = request.form['notes']
 
         new_component = Component(name=name, category=category, quantity=quantity, location=location, notes=notes)

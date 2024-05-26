@@ -11,8 +11,8 @@
                     Please enter a name.
                 </div>
             </div>
-            
-            <!-- <div class="mb-3">
+        
+                        <!-- <div class="mb-3">
                 <label for="category" class="form-label">Category:</label>
                 <input type="text" class="form-control" id="category" name="category" required placeholder="Boards, Sensors, Wires, components...">
                 <div class="invalid-feedback">
@@ -21,16 +21,16 @@
             </div> -->
                 <div class="form-group">
                     <label for="category" class="form-label">Category:</label>
-                    <input list="options" id="category" class="form-control" placeholder="Select or type...">
+                    <input list="options" name="category"   id="category" class="form-control" placeholder="Select or type..." autocomplete="off">
                     <datalist id="options">
                         <option value="Boards">
                         <option value="Sensors">
+                        <option value="Kits">
                         <option value="ELectronic Components">
                         <option value="Wires">
                         <option value="Other">
                     </datalist>
                 </div>
-            
         </div>
         <div class="col-md-4">
             <div class="mb-3">
@@ -64,7 +64,7 @@
 <form method="POST" enctype="multipart/form-data">
     <div class="mb-3">
         <label for="file" class="form-label">Choose XLSX file:</label>
-        <input type="file" class="form-control" id="file" name="file" accept=".xlsx" required>
+        <input type="file" class="form-control w-50" id="file" name="file" accept=".xlsx .xls" required>
     </div>
     <button type="submit" class="btn btn-primary">Upload</button>
 </form>

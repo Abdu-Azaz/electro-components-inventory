@@ -17,16 +17,43 @@
 </head>
 <body>
    
+    <nav
+        class="navbar navbar-expand-lg navbar-light bg-light"
+    >
+        <div class="container">
+            <a class="navbar-brand" href="#">CEIS Department</a>
+            <button
+                class="navbar-toggler hidden-lg-up"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavId"
+                aria-controls="collapsibleNavId"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            ></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/" aria-current="page"
+                            >Home
+                            <span class="visually-hidden">(current)</span></a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('add') }}">Add component</a>
+                    </li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
     
     <header class="bg-primary text-white p-3">
         <div class="container">
-            <h1 class="display-4">Inventory Management</h1>
-            <nav class="nav">
-                <a class="btn border-1 rounded-0 btn-outline-light m-1" href="{{ url_for('index') }}">Home</a>
-                <a class="btn border-1 rounded-0 btn-outline-light m-1" href="{{ url_for('add') }}">Add Component</a>
-                <!-- <a class="btn border-1 rounded-0 btn-outline-light m-1" href="{{ url_for('upload') }}">Upload XLSX</a> -->
-
-            </nav>
+            <div class="flex flex-direction-row">
+                <span class="display-4">Inventory Management</span>
+            </div>
         </div>
     </header>
     <main class="container my-4">
