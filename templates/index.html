@@ -1,75 +1,138 @@
-{% extends 'base.html' %}
-{% block content %}
-<h2 class="my-4">Component List</h2>
-<table class="table table-striped table-bordered" id="myTable">
-    <thead class="thead-dark">
+{% extends 'base.html' %} {% block content %}
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button
+      class="nav-link active fw-bold"
+      id="home-tab"
+      data-bs-toggle="tab"
+      data-bs-target="#home"
+      type="button"
+      role="tab"
+      aria-controls="home"
+      aria-selected="true"
+    >
+      Component List
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button
+      class="nav-link fw-bold"
+      id="profile-tab"
+      data-bs-toggle="tab"
+      data-bs-target="#profile"
+      type="button"
+      role="tab"
+      aria-controls="profile"
+      aria-selected="false"
+    >
+      Borrowed Components
+    </button>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div
+    class="tab-pane active"
+    id="home"
+    role="tabpanel"
+    aria-labelledby="home-tab"
+  >
+    <h2 class="my-4 fw-bold">Component List</h2>
+    <table class="table table-striped table-bordered" id="myTable">
+      <thead class="thead-dark">
         <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Quantity</th>
-            <th>Location</th>
-            <th>Out</th>
-            <th>Total</th>
-            <th>Actions</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>Location</th>
+          <th>Out</th>
+          <th>Total</th>
+          <th>Actions</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         {% for component in components %}
         <tr>
-            <td>{{ component.name }}</td>
-            <td>{{ component.category }}</td>
-            <td>{{ component.quantity }}</td>
-            <td>{{ component.location }}</td>
-            <td>{{ component.out }}</td>
-            <td>{{ component.quantity - component.out }}</td>
-            <td>
-                <a href="{{ url_for('update', id=component.id) }}" class="btn btn-warning btn-sm">Update</a>
-                <a href="{{ url_for('delete', id=component.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
-                <a href="{{ url_for('borrow', component_id=component.id) }}" class="btn btn-info btn-sm">Borrow</a>
-
-            </td>
+          <td>{{ component.name }}</td>
+          <td>{{ component.category }}</td>
+          <td>{{ component.quantity }}</td>
+          <td>{{ component.location }}</td>
+          <td>{{ component.out }}</td>
+          <td>{{ component.quantity - component.out }}</td>
+          <td>
+            <a
+              href="{{ url_for('update', id=component.id) }}"
+              class="btn btn-warning btn-sm"
+              >Update</a
+            >
+            <a
+              href="{{ url_for('delete', id=component.id) }}"
+              class="btn btn-danger btn-sm"
+              onclick="return confirm('Are you sure?')"
+              >Delete</a
+            >
+            <a
+              href="{{ url_for('borrow', component_id=component.id) }}"
+              class="btn btn-info btn-sm"
+              >Borrow</a
+            >
+          </td>
         </tr>
         {% endfor %}
-    </tbody>
-</table>
-
-<h2 class="my-4">Borrowed Components</h2> 
+      </tbody>
+    </table>
+  </div>
+  <div
+    class="tab-pane"
+    id="profile"
+    role="tabpanel"
+    aria-labelledby="profile-tab"
+  >
+    <h2 class="mt-4 fw-bold">Borrowed Components</h2>
 
     <form action="{{ url_for('clear') }}" method="post">
-        <button type="submit" class="btn btn-danger mb-3 d-inline-block">Clear</button>
+      <button type="submit" class="btn btn-sm btn-outline-danger pt-0">Clear</button>
     </form>
-<table class="table table-striped table-bordered" id="myTable2">
-    <thead class="thead-dark">
-        <tr>
+    <table class="table table-striped table-bordered w-100" id="myTable2">
+        <thead class="thead-dark">
+          <tr>
             <th>Borrower</th>
             <th>Component</th>
             <th>Quantity</th>
             <th>Borrowed Date</th>
             <th>Returned Date</th>
             <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for borrowed in borrowed_components %}
-        <tr>
+          </tr>
+        </thead>
+        <tbody>
+          {% for borrowed in borrowed_components %}
+          <tr>
             <td>{{ borrowed.borrower_name }}</td>
             <td>{{ borrowed.component.name }}</td>
             <td>{{ borrowed.borrowed_quantity }}</td>
-            <td>{{ borrowed.borrowed_date.strftime('%d %b, %Y %H:%M:%S') }}</td>
+            <td>{{ borrowed.borrowed_date.strftime('%d %b, %Y %H:%M') }}</td>
             <td>
-                {% if borrowed.returned_date %}
-                    {{ borrowed.returned_date.strftime('%d %b, %Y %H:%M:%S') }}
-                {% else %}
-                    Not Returned
-                {% endif %}
-            </td>                
-            <td>
-                {% if not borrowed.returned_date %}
-                <a href="{{ url_for('return_component', borrowed_id=borrowed.id) }}" class="btn btn-success btn-sm">Return</a>
-                {% endif %}
+              {% if borrowed.returned_date %} {{
+              borrowed.returned_date.strftime('%d %b, %Y %H:%M') }} {% else %}
+              Not Returned {% endif %}
             </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+            <td>
+              {% if not borrowed.returned_date %}
+              <a
+                href="{{ url_for('return_component', borrowed_id=borrowed.id) }}"
+                class="btn btn-success btn-sm"
+                >Return</a
+              >
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
+
 {% endblock %}

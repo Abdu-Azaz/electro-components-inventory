@@ -7,16 +7,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
     <title>Inventory Management</title>
-    
+    <style>
+        
+        .form-control{
+            border-radius: 0%;
+            border: 1px solid #666;
+        }
+    </style>
 </head>
 <body>
+   
+    
     <header class="bg-primary text-white p-3">
         <div class="container">
             <h1 class="display-4">Inventory Management</h1>
             <nav class="nav">
                 <a class="btn border-1 rounded-0 btn-outline-light m-1" href="{{ url_for('index') }}">Home</a>
                 <a class="btn border-1 rounded-0 btn-outline-light m-1" href="{{ url_for('add') }}">Add Component</a>
-                <a class="btn border-1 rounded-0 btn-outline-light m-1" href="{{ url_for('upload') }}">Upload XLSX</a>
+                <!-- <a class="btn border-1 rounded-0 btn-outline-light m-1" href="{{ url_for('upload') }}">Upload XLSX</a> -->
 
             </nav>
         </div>

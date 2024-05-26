@@ -9,13 +9,31 @@
             Please enter a name.
         </div>
     </div>
-    <div class="mb-3">
+    <!-- <div class="mb-3">
         <label for="category" class="form-label">Category:</label>
         <input type="text" class="form-control" id="category" name="category" value="{{ component.category }}" required>
         <div class="invalid-feedback">
             Please enter a category.
         </div>
+    </div> -->
+
+
+    <div class="form-group">
+        <label for="category" class="form-label">Category:</label>
+        <input list="options" id="category" class="form-control" placeholder="Select or type..." name="category" value="{{ component.category }}" required>
+        <datalist id="options">
+            <option value="Boards">
+            <option value="Sensors">
+            <option value="ELectronic Components">
+            <option value="Wires">
+            <option value="Other">
+        </datalist>
+        <div class="invalid-feedback">
+            Please enter a category.
+        </div>
     </div>
+
+
     <div class="mb-3">
         <label for="quantity" class="form-label">Quantity:</label>
         <input type="number" class="form-control" id="quantity" name="quantity" value="{{ component.quantity }}" required>
