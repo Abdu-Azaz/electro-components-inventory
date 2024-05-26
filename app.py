@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, send_file
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import pandas as pd
-
+import csv
+import io
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///inventory.db'
@@ -158,6 +159,33 @@ def upload():
             flash('Invalid file format. Please upload an XLSX file.')
             return redirect(request.url)
     return render_template('upload.html')
+
+
+
+@app.route('/export_csv')
+def export_csv():
+    components = Component.query.all()
+    
+    # Use StringIO to create a string buffer to write to
+    csv_buffer = io.StringIO()
+    writer = csv.writer(csv_buffer)
+    
+    # Write CSV headers
+    writer.writerow(['ID', 'Name', 'Quantity', 'Category', 'Location', 'Notes', 'Out'])
+    
+    # Write data rows
+    for component in components:
+        writer.writerow([component.id, component.name, component.quantity, component.category, component.location, component.notes, component.out])
+    
+    # Create a response with the CSV data
+    response = send_file(
+        io.BytesIO(csv_buffer.getvalue().encode('utf-8')),
+        mimetype='text/csv',
+        as_attachment=True,
+        download_name='components.csv'
+    )
+    
+    return response
 
 if __name__ == "__main__":
     with app.app_context():
