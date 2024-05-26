@@ -14,6 +14,7 @@ db = SQLAlchemy(app)
 
 class Component(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    inventory_number = db.Column(db.String(100), nullable=True,)
     name = db.Column(db.String(100), nullable=False)
     category = db.Column(db.String(100), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
@@ -64,12 +65,13 @@ def add():
         print("Hello")
         print(request.form)
         name = request.form['name']
+        inventory_number = request.form['inventory_number']
         quantity = request.form['quantity']
         location = request.form['location']
         category = request.form['category']
         notes = request.form['notes']
 
-        new_component = Component(name=name, category=category, quantity=quantity, location=location, notes=notes)
+        new_component = Component(name=name, category=category, quantity=quantity, location=location, notes=notes,inventory_number=inventory_number)
         db.session.add(new_component)
         db.session.commit()
         return redirect(url_for('index'))
@@ -80,6 +82,7 @@ def update(id):
     component = Component.query.get_or_404(id)
     if request.method == 'POST':
         component.name = request.form['name']
+        component.inventory_number = request.form['inventory_number']
         component.category = request.form['category']
         component.quantity = request.form['quantity']
         component.location = request.form['location']

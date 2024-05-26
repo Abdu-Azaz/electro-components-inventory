@@ -34,12 +34,13 @@
         </div>
         <div class="col-md-4">
             <div class="mb-3">
-                <label for="quantity" class="form-label">Quantity:</label>
-                <input type="number" class="form-control" id="quantity" name="quantity" required>
+                <label for="inventory_number" class="form-label">Inventory ID:</label>
+                <input type="text" class="form-control" id="inventory_number" name="inventory_number" required>
                 <div class="invalid-feedback">
-                    Please enter a quantity.
+                    Please enter a Inventory.
                 </div>
             </div>
+            
             <div class="mb-3">
                 <label for="location" class="form-label">Location:</label>
                 <input type="text" class="form-control" id="location" name="location" required>
@@ -47,8 +48,16 @@
                     Please enter a location.
                 </div>
             </div>
+            
         </div>
         <div class="col-md-4">
+            <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity:</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" required>
+                <div class="invalid-feedback">
+                    Please enter a quantity.
+                </div>
+            </div>
             <div class="mb-3">
                 <label for="notes" class="form-label">Notes:</label>
                 <textarea class="form-control" id="notes" name="notes"></textarea>
@@ -66,7 +75,7 @@
         <label for="file" class="form-label">Choose XLSX file:</label>
         <input type="file" class="form-control w-50" id="file" name="file" accept=".xlsx .xls" required>
     </div>
-    <button type="submit" class="btn btn-primary">Upload</button>
+    <button type="submit" class="btn btn-primary py-0">Upload</button>
 </form>
 
 {% endblock %}

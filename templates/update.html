@@ -10,6 +10,13 @@
         </div>
     </div>
     <div class="mb-3">
+        <label for="inventory_number" class="form-label">Inventory:</label>
+        <input type="text" class="form-control" id="inventory_number" name="inventory_number" value="{{ component.inventory_number }}" required>
+        <div class="invalid-feedback">
+            Please enter a inventory.
+        </div>
+    </div>
+    <div class="mb-3">
         <label for="category" class="form-label">Category:</label>
         <input type="text" class="form-control" id="category" name="category" value="{{ component.category }}" required>
         <div class="invalid-feedback">
