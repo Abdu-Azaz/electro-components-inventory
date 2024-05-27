@@ -174,18 +174,18 @@ def export_csv():
     writer = csv.writer(csv_buffer)
     
     # Write CSV headers
-    writer.writerow(['ID', 'Name', 'Quantity', 'Category', 'Location', 'Notes', 'Out'])
+    writer.writerow(['ID', 'Name', 'Inventory_number' 'Quantity', 'Category', 'Location', 'Out', 'Notes'])
     
     # Write data rows
     for component in components:
-        writer.writerow([component.id, component.name, component.quantity, component.category, component.location, component.notes, component.out])
+        writer.writerow([component.id, component.name,component.name, component.quantity, component.category, component.location,  component.out, component.notes])
     
     # Create a response with the CSV data
     response = send_file(
         io.BytesIO(csv_buffer.getvalue().encode('utf-8')),
         mimetype='text/csv',
         as_attachment=True,
-        download_name='components.csv'
+        download_name='components_gisi.csv'
     )
     
     return response
